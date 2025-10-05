@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse Fonctionnelle MERISE - E-commerce de Mode</title>
+    <style>
+        :root {
+            --color-mauve: #9370DB;
+            --color-black: #000000;
+            --color-white: #FFFFFF;
+            --color-bg-light: #F4F4F9;
+            --color-item-bg: #F0F8FF; 
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--color-bg-light);
+            color: var(--color-black);
+            margin: 0;
+            padding: 0;
+        }
+        .cont {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+            background-color: var(--color-white);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .h1 {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--color-black);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--color-mauve);
+        }
+
+        .h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--color-mauve);
+            padding-left: 15px;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-left: 6px solid var(--color-black);
+        }
+
+        .p-desc {
+            color: #444;
+            margin-bottom: 20px;
+            font-size: 1rem;
+        }
+
+        .r-list {
+            list-style: none;
+            padding: 0;
+            margin-bottom: 20px;
+        }
+
+        .r-item {
+            padding: 15px;
+            margin-bottom: 10px;
+            background-color: var(--color-item-bg);
+            border-radius: 8px;
+            border-left: 4px solid var(--color-mauve);
+            transition: transform 0.2s;
+            line-height: 1.4;
+        }
+
+        .r-item:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .hr {
+            margin: 40px 0;
+            border: 0;
+            border-top: 1px solid #ccc;
+        }
+
+        .table-wrap {
+            overflow-x: auto;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        
+        .d-table {
+            min-width: 700px;
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .d-table th {
+            background-color: var(--color-mauve);
+            color: var(--color-white);
+            padding: 12px 15px;
+            text-align: left;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+        }
+
+        .d-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+            white-space: nowrap;
+            font-size: 0.9rem;
+        }
+
+        .d-table tbody tr:nth-child(even) {
+            background-color: #f8f8f8;
+        }
+
+        .d-table td.strong {
+            font-weight: 500;
+        }
+
+        .t-footer {
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #888;
+            font-style: italic;
+        }
+      
+        }
+    </style>
+</head>
+<body>
+    <div class="cont">
+
+        <h1 class="h1">
+            Analyse des Besoins Métier (MERISE)
+        </h1>
+        <p class="p-desc">
+            Ce document est destiné à l'étudiant en ingénierie informatique pour la phase de conception du système d'information. Il contient les **règles de gestion** et le **dictionnaire de données brutes** nécessaires à l'établissement des modèles conceptuels.
+        </p>
+
+        <h2 class="h2">
+            Règles de Gestion des Données
+        </h2>
+        <p class="p-desc">
+            Ces règles décrivent le fonctionnement de l'entreprise (le "quoi"), sans considération technique ou organisationnelle.
+        </p>
+
+        <ul class="r-list">
+            <li class="r-item">
+                Chaque **client** dispose d'un compte unique, identifié par son **adresse e-mail**. Nous stockons son nom, prénom, adresse, numéro de téléphone et ses préférences de communication.
+            </li>
+            <li class="r-item">
+                Un client peut avoir **plusieurs adresses de livraison** enregistrées, et une seule peut être désignée comme l'**adresse par défaut**.
+            </li>
+            <li class="r-item">
+                Un **article** (produit) est identifié par une **référence interne**, un nom, une marque, une catégorie principale et plusieurs sous-catégories.
+            </li>
+            <li class="r-item">
+                Un article est décliné en plusieurs **variations** (par **taille** et **couleur**), chacune ayant un code spécifique.
+            </li>
+            <li class="r-item">
+                Les **prix de vente** peuvent varier en fonction de promotions et sont toujours associés à une **période de validité** (date de début et de fin).
+            </li>
+            <li class="r-item">
+                Le **stock** est géré par **lieu de stockage** (entrepôts ou magasins physiques). La **quantité disponible** est suivie pour chaque variation d'article par lieu.
+            </li>
+            <li class="r-item">
+                Une **commande** regroupe **une ou plusieurs lignes de commande**. Elle est associée à un client, une date, un montant total et un statut évolutif ("Préparation en cours", "Expédiée", etc.).
+            </li>
+            <li class="r-item">
+                Le **paiement** est enregistré comme une transaction financière avec son montant, son type (carte, PayPal, etc.) et une référence unique.
+            </li>
+            <li class="r-item">
+                Des **codes de réduction** peuvent être appliqués. Ils ont une valeur (pourcentage ou fixe) et une période de validité.
+            </li>
+            <li class="r-item">
+                Un client peut effectuer un **retour** d'article, qui est lié à une commande et spécifie la raison.
+            </li>
+            <li class="r-item">
+                Les **avis et notes** laissés par les clients sur les produits sont soumis à une **modération** avant publication.
+            </li>
+            <li class="r-item">
+                Le support client est géré par un système de **tickets**, chacun ayant un sujet, une description, un statut et un lien vers le client concerné.
+            </li>
+        </ul>
+        
+        <hr class="hr">
+
+        <h2 class="h2">
+            Dictionnaire de Données Brutes (35 Données)
+        </h2>
+        <p class="p-desc">
+            Ce tableau liste les données élémentaires recueillies, sans préjuger de leur futur regroupement en entités ou de la structure de la base de données.
+        </p>
+
+        <div class="table-wrap">
+            <table class="d-table">
+                <thead>
+                    <tr>
+                        <th>Signification de la donnée</th>
+                        <th>Type</th>
+                        <th>Taille (caractères / chiffres)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="strong">ID Client</td><td>Alphanumérique</td><td>10</td></tr>
+                    <tr><td>Nom de famille du client</td><td>Texte</td><td>50</td></tr>
+                    <tr><td>Prénom du client</td><td>Texte</td><td>50</td></tr>
+                    <tr><td>Adresse email du client</td><td>Texte</td><td>100</td></tr>
+                    <tr><td>Mot de passe client (hashé)</td><td>Alphanumérique</td><td>255</td></tr>
+                    <tr><td>Date d'inscription du client</td><td>Date</td><td>10 (AAAA-MM-JJ)</td></tr>
+                    <tr><td>Statut programme fidélité</td><td>Booléen</td><td>1 (Oui/Non)</td></tr>
+                    
+                    <tr><td class="strong">ID Adresse de livraison</td><td>Alphanumérique</td><td>10</td></tr>
+                    <tr><td>Ligne d'adresse</td><td>Texte</td><td>200</td></tr>
+                    <tr><td>Ville</td><td>Texte</td><td>50</td></tr>
+                    <tr><td>Code postal</td><td>Alphanumérique</td><td>10</td></tr>
+                    <tr><td>Pays</td><td>Texte</td><td>50</td></tr>
+                    <tr><td>Statut adresse par défaut</td><td>Booléen</td><td>1 (Oui/Non)</td></tr>
+                    
+                    <tr><td class="strong">Référence Article</td><td>Alphanumérique</td><td>15</td></tr>
+                    <tr><td>Nom de l'article</td><td>Texte</td><td>100</td></tr>
+                    <tr><td>Marque de l'article</td><td>Texte</td><td>50</td></tr>
+                    <tr><td>Description de l'article</td><td>Texte</td><td>1000</td></tr>
+                    <tr><td>Catégorie principale</td><td>Texte</td><td>50</td></tr>
+                    <tr><td>Sous-catégorie</td><td>Texte</td><td>50</td></tr>
+                    <tr><td>Couleur de l'article</td><td>Texte</td><td>30</td></tr>
+                    <tr><td>Taille de l'article</td><td>Alphanumérique</td><td>5</td></tr>
+                    
+                    <tr><td class="strong">Prix de vente unitaire</td><td>Numérique</td><td>8,2 (8 chiffres, 2 décimales)</td></tr>
+                    <tr><td>Date de début de validité (Prix)</td><td>Date</td><td>10 (AAAA-MM-JJ)</td></tr>
+                    <tr><td>Date de fin de validité (Prix)</td><td>Date</td><td>10 (AAAA-MM-JJ)</td></tr>
+
+                    <tr><td class="strong">ID Lieu de Stockage (Entrepôt/Magasin)</td><td>Alphanumérique</td><td>8</td></tr>
+                    <tr><td>Nom du lieu de stockage</td><td>Texte</td><td>50</td></tr>
+                    <tr><td>Quantité en stock</td><td>Numérique</td><td>5</td></tr>
+
+                    <tr><td class="strong">ID Commande</td><td>Alphanumérique</td><td>12</td></tr>
+                    <tr><td>Date de la commande</td><td>Date</td><td>10 (AAAA-MM-JJ)</td></tr>
+                    <tr><td>Statut de la commande</td><td>Texte</td><td>20</td></tr>
+                    <tr><td>Montant total de la commande</td><td>Numérique</td><td>10,2 (10 chiffres, 2 décimales)</td></tr>
+                    <tr><td>Quantité d'article commandée</td><td>Numérique</td><td>4</td></tr>
+                    <tr><td>ID Transaction de paiement</td><td>Alphanumérique</td><td>20</td></tr>
+                    <tr><td>Type de paiement (Carte, PayPal, etc.)</td><td>Texte</td><td>30</td></tr>
+                    
+                    <tr><td class="strong">ID Code de Réduction</td><td>Alphanumérique</td><td>10</td></tr>
+                    <tr><td class="strong">Note produit (sur 5)</td><td>Numérique</td><td>1</td></tr>
+
+                </tbody>
+            </table>
+        </div>
+        <p class="t-footer">Total: 35 données brutes.</p>
+
+    </div>
+</body>
+</html>
